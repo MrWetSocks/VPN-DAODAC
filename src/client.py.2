@@ -1,8 +1,8 @@
 import requests
 import socket
 
-HOST = "127.0.0.1"
-PORT = 65432
+HOST = "192.168.201.173"
+PORT = 12345
 
 def receive_request():
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
@@ -25,4 +25,4 @@ def send_request():
     
         print(f"Received {data!r}")
 
-receive_request()
+send_request()
