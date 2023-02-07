@@ -1,14 +1,25 @@
 import socket
+import asyncio
 
-s = socket.socket()
+HOST = "localhost"
+PORT = 12346
 
-port = 12345
+async def loop():
+    while True:
+        with socket.socket() as s:
+            s.bind((HOST, PORT))
+            s.listen()
+            conn, addr = s.accept()
+            with conn:
+                print(f"Connected to {addr}")
+                while True:
+                    data = conn.recv(1024)
+                    if not data:
+                        break
+                    if data == b"exit\n":
+                        break
 
-s.bind(("", port))
-s.listen(5)
+                    conn.sendall(b"Message recieved\n")
+                    print(data.decode())
 
-while True:
-    c, addr = s.accept()
-    print(addr)
-    c.send("Connected".encode())
-    print(c.recv(1024).decode())
+asyncio.run(loop())
