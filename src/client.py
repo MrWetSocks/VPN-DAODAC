@@ -2,7 +2,7 @@ import requests
 import socket
 
 HOST = "127.0.0.1"
-PORT = 12346
+PORT = 12345
 
 def receive_request():
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:

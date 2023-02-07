@@ -1,14 +1,15 @@
 import socket
 import asyncio
+import requests
 
 HOST = "localhost"
-PORT = 12346
+PORT = 12345
 
 async def loop():
-    while True:
-        with socket.socket() as s:
-            s.bind((HOST, PORT))
-            s.listen()
+    with socket.socket() as s:
+        s.bind((HOST, PORT))
+        s.listen()
+        while True:
             conn, addr = s.accept()
             with conn:
                 print(f"Connected to {addr}")
@@ -18,7 +19,7 @@ async def loop():
                         break
                     if data == b"exit\n":
                         break
-
+                    conn.sendall(requests.get("https://google.com").content)
                     conn.sendall(b"Message recieved\n")
                     print(data.decode())
 
