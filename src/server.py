@@ -1,11 +1,14 @@
 import socket
 import asyncio
 import requests
+import re
+import random
 
 HOST = "localhost"
-PORT = 12345
+PORT = random.randrange(20000, 30000)
+print(PORT)
 
-async def loop():
+async def server():
     with socket.socket() as s:
         s.bind((HOST, PORT))
         s.listen()
@@ -16,8 +19,7 @@ async def loop():
                 data = conn.recv(1024)
                 if not data:
                     break
-                conn.sendall(requests.get("https://google.com").content)
-                conn.close()
-                print(data.decode())
+                data = requests.get(data.decode("UTF-8")).content
+                conn.sendall(data)
 
-asyncio.run(loop())
+asyncio.run(server())
