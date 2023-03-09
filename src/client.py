@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import requests
 import socket
 import os
@@ -10,6 +11,8 @@ if len(sys.argv) == 3:
     HOST, PORT = sys.argv[-2].split(':')
     PORT = int(PORT)
     TERM = sys.argv[-1]
+else:
+    print("usage: client.py ip:port website")
 print(sys.argv)
 
 

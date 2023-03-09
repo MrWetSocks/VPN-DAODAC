@@ -4,9 +4,9 @@ import requests
 import re
 import random
 
-HOST = "192.168.201.162"
+HOST = "192.168.201.132"
 PORT = random.randrange(20000, 30000)
-print(PORT)
+print(f"{HOST}:{PORT}")
 
 async def server():
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
